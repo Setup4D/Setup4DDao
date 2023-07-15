@@ -65,6 +65,29 @@ type
     {$ENDIF}
     function PGDatabase: ISetup4DDAO<T>;
 
+   {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Retorna uma nova instância do DAO com uma configuração do
+    /// banco de dados SQLite.
+    /// </summary>
+    /// <returns>
+    /// A instância de ISetup4DDAO<T> com a configuração do
+    /// banco de dados SQLite.</returns>
+    /// <remarks>
+    /// Este método configura o DAO para usar um banco de dados SQLite
+    /// para operações de acesso aos dados.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Returns a new instance of the DAO with a SQLite database configuration.
+    /// </summary>
+    /// <returns>The instance of ISetup4DDAO<T> with the SQLite database configuration.</returns>
+    /// <remarks>
+    /// This method configures the DAO to use a SQLite database for data access operations.
+    /// </remarks>
+    {$ENDIF}
+    function SQLiteDatabase: ISetup4DDAO<T>;
+
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Configura o DAO para realizar validação com exceções.

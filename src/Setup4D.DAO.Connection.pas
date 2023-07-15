@@ -12,13 +12,39 @@ uses
 {$IFDEF FRAMEWORK_FMX}
   FireDAC.FMXUI.Wait,
 {$ENDIF}
-
+  FireDAC.DatS,
   FireDAC.DApt,
+  FireDAC.Phys,
+  FireDAC.Comp.UI,
+  FireDAC.UI.Intf,
   FireDAC.Phys.PG,
   FireDAC.Stan.Def,
+  FireDAC.Phys.ADS,
+  FireDAC.Stan.Intf,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.Pool,
   FireDAC.Stan.Async,
   FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.Phys.PGDef,
+  FireDAC.Phys.MySQL,
+  FireDAC.Phys.ADSDef,
   FireDAC.Comp.Client,
+  FireDAC.Phys.SQLite,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.ResStrs,
+  FireDAC.Comp.DataSet,
+  FireDAC.Phys.PGWrapper,
+  FireDAC.ConsoleUI.Wait,
+  FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteDef,
+  FireDAC.Phys.ADSWrapper,
+  FireDAC.Stan.StorageBin,
+  FireDAC.Phys.MySQLWrapper,
+  FireDAC.Phys.SQLiteWrapper,
+
+
 
   System.SysUtils;
 
@@ -26,6 +52,9 @@ type
   TSetup4DDAOConnection<T: Class> = class(TInterfacedObject, ISetup4DDAOConnection<T>)
   private
     FConnection: TFDConnection;
+    FDriverPG: TFDPhysPgDriverLink;
+    FDriverSQLite: TFDPhysSQLiteDriverLink;
+    FCursor: TFDGUIxWaitCursor;
 
   protected
 
@@ -127,21 +156,41 @@ begin
   FConnection := TFDConnection.Create(nil);
   FConnection.Params.Clear;
   FConnection.DriverName := AValue.ToString;
+  FCursor := TFDGUIxWaitCursor.Create(FConnection);
 
   case AValue of
+    TDatabaseTypes.ADS,
     TDatabaseTypes.Firebird,
-    TDatabaseTypes.MySQL,
-    TDatabaseTypes.SQLite: raise Exception.Create(TSetup4DDAOSession.GetInstance.SystemMessage.DatabaseNotImplemented);
+    TDatabaseTypes.MySQL: raise Exception.Create(TSetup4DDAOSession.GetInstance.SystemMessage.DatabaseNotImplemented);
 
     TDatabaseTypes.PG:
     begin
+      FDriverPG := TFDPhysPgDriverLink.Create(FConnection);
+
       // Configurar as propriedades da conexão com o PostgreSQL
+      FConnection.Params.Add(Format('Database=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName]));
+
       FConnection.Params.Add(Format('Server=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.Host]));
       FConnection.Params.Add(Format('Port=%d', [TSetup4DDAOSession.GetInstance.ConnectionParam.Port]));
-      FConnection.Params.Add(Format('Database=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName]));
       FConnection.Params.Add(Format('User_Name=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.UserName]));
       FConnection.Params.Add(Format('Password=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.Password]));
 
+    end;
+
+    TDatabaseTypes.SQLite:
+    begin
+      {TODO -oRicardo  -cEncypt Banco de dados : Configurar a encriptação do banco de dados SQLite}
+      FDriverSQLite := TFDPhysSQLiteDriverLink.Create(FConnection);
+
+      FConnection.Params.Add(Format('Database=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName]));
+      FConnection.Params.Add(Format('OpenMode=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.OpenMode.ToString]));
+      FConnection.Params.Add(Format('LockingMode=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.LockingMode.ToString]));
+
+      if TSetup4DDAOSession.GetInstance.ConnectionParam.EncryptSQLite = TEncryptSQLite.No then
+        Exit;
+
+      FConnection.Params.Add(Format('Encrypt=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.EncryptSQLite.ToString]));
+      FConnection.Params.Add(Format('Password=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.Password]));
     end;
   end;
 end;

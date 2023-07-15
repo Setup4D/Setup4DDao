@@ -73,6 +73,42 @@ type
   {$ENDIF}
   TLogicalOperator = (NULL, _AND, _OR, _AND_NOT, _OR_NOT);
 
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Modos de utilização do banco de dados SQLite que pode ser
+  /// criado, ou Leitura, ou Leitura e escrita.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Modes of use of the SQLite database which can be either
+  /// created, or Read, or Read and write.
+  /// </summary>
+  {$ENDIF}
+  TOpenMode = (CreateUTF8, CreateUTF16, ReadWrite, ReadOnly);
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Modos de controle do banco de dados.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Database control modes.
+  /// </summary>
+  {$ENDIF}
+  TLokingMode = (Exclusive, Normal);
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Tipos de criptografia utilizados para proteger os arquivos SQLite.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Encryption types used to protect SQLite files.
+  /// </summary>
+  {$ENDIF}
+  TEncryptSQLite = (No, aes_128, aes_192, aes_256, aes_ctr_128, aes_ctr_256,
+                    aes_ecb_128, aes_ecb_192, aes_ecb_256);
+
 
 {$SCOPEDENUMS OFF}
 

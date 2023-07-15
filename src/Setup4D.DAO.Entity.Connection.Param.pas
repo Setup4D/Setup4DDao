@@ -12,6 +12,9 @@
 unit Setup4D.DAO.Entity.Connection.Param;
 
 interface
+
+uses
+  Setup4D.DAO.Types;
 type
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
@@ -37,6 +40,9 @@ type
     FDatabaseName: string;
     FUserName: string;
     FPassword: string;
+    FOpenMode: TOpenMode;
+    FLockingMode: TLokingMode;
+    FEncryptSQLite: TEncryptSQLite;
   public
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -102,6 +108,39 @@ type
     /// <value>The password used for the connection.</value>
     {$ENDIF}
     property Password: string read FPassword write FPassword;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Modo de abertura do arquivo SQLite.
+    /// </summary>
+    {$ELSE}
+    /// <summary>
+    /// SQLite file open mode.
+    /// </summary>
+    {$ENDIF}
+    property OpenMode: TOpenMode read FOpenMode write FOpenMode;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Modo de bloqueio do arquivo SQLite.
+    /// </summary>
+    {$ELSE}
+    /// <summary>
+    /// SQLite file locking mode.
+    /// </summary>
+    {$ENDIF}
+    property LockingMode: TLokingMode read FLockingMode write FLockingMode;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Tipo de criptografia do arquivo SQLite.
+    /// </summary>
+    {$ELSE}
+    /// <summary>
+    /// SQLite file encryption type.
+    /// </summary>
+    {$ENDIF}
+    property EncryptSQLite: TEncryptSQLite read FEncryptSQLite write FEncryptSQLite;
   end;
 implementation
 

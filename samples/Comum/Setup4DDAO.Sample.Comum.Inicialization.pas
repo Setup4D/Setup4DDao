@@ -10,6 +10,10 @@ var
 
 implementation
 
+uses
+  Setup4D.DAO.Types,
+  System.SysUtils;
+
 Initialization
 {$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown := True;
@@ -22,6 +26,13 @@ Initialization
   FDAOSetup.ConnectionParam.UserName := USUARIO;
   FDAOSetup.ConnectionParam.Password := SENHA;
 }
+
+  FDAOSetup.ConnectionParam.DatabaseName := '.\..\..\..\Comum\assets\DB\Setup4DDAOExemplo.dat';
+  FDAOSetup.ConnectionParam.OpenMode :=  TOpenMode.ReadWrite;
+  FDAOSetup.ConnectionParam.LockingMode :=  TLokingMode.Normal;
+  FDAOSetup.ConnectionParam.EncryptSQLite :=  TEncryptSQLite.No;
+  FDAOSetup.ConnectionParam.Password := EmptyStr;
+
 finalization
   FDAOSetup.ReleaseInstance;
 

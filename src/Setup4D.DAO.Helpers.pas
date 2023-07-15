@@ -130,6 +130,89 @@ type
     function ToString: string;
   end;
 
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Helper record para a enumeração TEncryptSQLite.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Helper record for the TEncryptSQLite enumeration.
+  /// </summary>
+  {$ENDIF}
+  TSetup4DDAOEncryptSQLiteOperatorHelper = record helper for TEncryptSQLite
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte o valor da enumeração em uma string.
+    /// </summary>
+    /// <returns>
+    /// A string correspondente ao valor da enumeração.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts the enumeration value to a string.
+    /// </summary>
+    /// <returns>
+    /// The string corresponding to the enumeration value.
+    /// </returns>
+    {$ENDIF}
+    function ToString: string;
+  end;
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Helper record para a enumeração TOpenMode.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Helper record for the TOpenMode enumeration.
+  /// </summary>
+  {$ENDIF}
+  TSetup4DDAOOpenModeHelper = record helper for TOpenMode
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte o valor da enumeração em uma string.
+    /// </summary>
+    /// <returns>
+    /// A string correspondente ao valor da enumeração.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts the enumeration value to a string.
+    /// </summary>
+    /// <returns>
+    /// The string corresponding to the enumeration value.
+    /// </returns>
+    {$ENDIF}
+    function ToString: string;
+  end;
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Helper record para a enumeração TLokingMode.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Helper record for the TLokingMode enumeration.
+  /// </summary>
+  {$ENDIF}
+  TSetup4DDAOLokingModeHelper = record helper for TLokingMode
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte o valor da enumeração em uma string.
+    /// </summary>
+    /// <returns>
+    /// A string correspondente ao valor da enumeração.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts the enumeration value to a string.
+    /// </summary>
+    /// <returns>
+    /// The string corresponding to the enumeration value.
+    /// </returns>
+    {$ENDIF}
+    function ToString: string;
+  end;
 implementation
 
 uses
@@ -205,6 +288,45 @@ begin
     TLogicalOperator._OR: Result := 'OR';
     TLogicalOperator._AND_NOT: Result := 'AND NOT';
     TLogicalOperator._OR_NOT: Result := 'OR NOT';
+  end;
+end;
+
+{ TSetup4DDAOEncryptSQLiteOperatorHelper }
+
+function TSetup4DDAOEncryptSQLiteOperatorHelper.ToString: string;
+begin
+  case self of
+    TEncryptSQLite.No: Result := 'No';
+    TEncryptSQLite.aes_128: Result := 'aes-128';
+    TEncryptSQLite.aes_192: Result := 'aes-192';
+    TEncryptSQLite.aes_256: Result := 'aes-256';
+    TEncryptSQLite.aes_ctr_128: Result := 'aes-ctr-128';
+    TEncryptSQLite.aes_ctr_256: Result := 'aes-ctr-256';
+    TEncryptSQLite.aes_ecb_128: Result := 'aes-ecb-128';
+    TEncryptSQLite.aes_ecb_192: Result := 'aes-ecb-192';
+    TEncryptSQLite.aes_ecb_256: Result := 'aes-ecb-256';
+  end;
+end;
+
+{ TSetup4DDAOOpenModeHelper }
+
+function TSetup4DDAOOpenModeHelper.ToString: string;
+begin
+  case self of
+    TOpenMode.CreateUTF8: Result := 'CreateUTF8';
+    TOpenMode.CreateUTF16: Result := 'CreateUTF16';
+    TOpenMode.ReadWrite: Result := 'ReadWrite';
+    TOpenMode.ReadOnly: Result := 'ReadOnly';
+  end;
+end;
+
+{ TSetup4DDAOLokingModeHelper }
+
+function TSetup4DDAOLokingModeHelper.ToString: string;
+begin
+  case self of
+    TLokingMode.Exclusive: Result := 'Exclusive';
+    TLokingMode.Normal: Result := 'Normal';
   end;
 end;
 
