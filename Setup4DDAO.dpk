@@ -1,0 +1,55 @@
+﻿package Setup4DDAO;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  dbrtl,
+  FireDAC,
+  FireDACCommonDriver,
+  FireDACCommon,
+  FireDACPgDriver;
+
+contains
+  Setup4D.DAO.Types in 'src\Setup4D.DAO.Types.pas',
+  Setup4D.DAO.Entity.System.Message in 'src\Setup4D.DAO.Entity.System.Message.pas',
+  Setup4D.DAO.Entity.Connection.Param in 'src\Setup4D.DAO.Entity.Connection.Param.pas',
+  Setup4D.DAO.Session in 'src\Setup4D.DAO.Session.pas',
+  Setup4D.DAO.Useful in 'src\Setup4D.DAO.Useful.pas',
+  Setup4D.DAO.Interf in 'src\Setup4D.DAO.Interf.pas',
+  Setup4D.DAO.Attribute in 'src\Setup4D.DAO.Attribute.pas',
+  Setup4D.DAO.Rtti in 'src\Setup4D.DAO.Rtti.pas',
+  Setup4D.DAO.Connection in 'src\Setup4D.DAO.Connection.pas',
+  Setup4D.DAO in 'src\Setup4D.DAO.pas',
+  Setup4D.DAO.Records in 'src\Setup4D.DAO.Records.pas',
+  Setup4D.DAO.Helpers in 'src\Setup4D.DAO.Helpers.pas',
+  Setup4D.DAO.Custom.Interf in 'src\Setup4D.DAO.Custom.Interf.pas',
+  Setup4D.DAO.Custom in 'src\Setup4D.DAO.Custom.pas';
+
+end.
+

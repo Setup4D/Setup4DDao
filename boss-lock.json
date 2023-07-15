@@ -1,0 +1,14 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2023-07-06T09:04:21.589647-03:00",
+	"installedModules": {
+		"https://github.com/ricksolucoes/dataset-serialize": {
+			"name": "dataset-serialize",
+			"version": "2.4.9",
+			"hash": "bf033ddba27d8f4753f903c84891136d",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

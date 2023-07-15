@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E7A57FC2-E451-4687-B461-CD2061645C65}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Setup4DDAO.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="samples\VCL\Setup4D_Sample_VCL.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="samples\FMX\Setup4D_Sample_FMX.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Setup4DDAO">
+        <MSBuild Projects="Setup4DDAO.dproj"/>
+    </Target>
+    <Target Name="Setup4DDAO:Clean">
+        <MSBuild Projects="Setup4DDAO.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Setup4DDAO:Make">
+        <MSBuild Projects="Setup4DDAO.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Setup4D_Sample_VCL">
+        <MSBuild Projects="samples\VCL\Setup4D_Sample_VCL.dproj"/>
+    </Target>
+    <Target Name="Setup4D_Sample_VCL:Clean">
+        <MSBuild Projects="samples\VCL\Setup4D_Sample_VCL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Setup4D_Sample_VCL:Make">
+        <MSBuild Projects="samples\VCL\Setup4D_Sample_VCL.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Setup4D_Sample_FMX">
+        <MSBuild Projects="samples\FMX\Setup4D_Sample_FMX.dproj"/>
+    </Target>
+    <Target Name="Setup4D_Sample_FMX:Clean">
+        <MSBuild Projects="samples\FMX\Setup4D_Sample_FMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Setup4D_Sample_FMX:Make">
+        <MSBuild Projects="samples\FMX\Setup4D_Sample_FMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Setup4DDAO;Setup4D_Sample_VCL;Setup4D_Sample_FMX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Setup4DDAO:Clean;Setup4D_Sample_VCL:Clean;Setup4D_Sample_FMX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Setup4DDAO:Make;Setup4D_Sample_VCL:Make;Setup4D_Sample_FMX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
