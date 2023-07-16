@@ -26,6 +26,25 @@ type
     property Ocultar: string read FOcultar write FOcultar;
   end;
 
+  [TTable('Clientes')]
+  TClientes = class
+  private
+    FID: string;
+    FNome: string;
+    FEmail: string;
+    FOcultar: string;
+  public
+    [TField('ID'), TPrimaryKey]
+    property ID: string read FID write FID;
+    [TField('NOME')]
+    [TRequiredField]
+    property Nome: string read FNome write FNome;
+    [TField('EMAIL')]
+    property Email: string read FEmail write FEmail;
+    [TField('OCULTAR')]
+    property Ocultar: string read FOcultar write FOcultar;
+  end;
+
 implementation
 
 end.

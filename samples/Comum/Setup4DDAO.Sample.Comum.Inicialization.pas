@@ -33,6 +33,11 @@ Initialization
   FDAOSetup.ConnectionParam.EncryptSQLite :=  TEncryptSQLite.No;
   FDAOSetup.ConnectionParam.Password := EmptyStr;
 
+{ //Configurar o ADS
+  FDAOSetup.ConnectionParam.DatabaseName := ExtractFilePath(ParamStr(0));
+}
+
+
 finalization
   FDAOSetup.ReleaseInstance;
 

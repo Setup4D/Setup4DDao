@@ -54,6 +54,8 @@ type
     FConnection: TFDConnection;
     FDriverPG: TFDPhysPgDriverLink;
     FDriverSQLite: TFDPhysSQLiteDriverLink;
+    FDriverADS: TFDPhysADSDriverLink;
+
     FCursor: TFDGUIxWaitCursor;
 
   protected
@@ -154,12 +156,16 @@ begin
     raise Exception.Create(TSetup4DDAOSession.GetInstance.SystemMessage.DatabaseUndefined);
 
   FConnection := TFDConnection.Create(nil);
-  FConnection.Params.Clear;
-  FConnection.DriverName := AValue.ToString;
   FCursor := TFDGUIxWaitCursor.Create(FConnection);
 
+  FConnection.FetchOptions.Mode := TFDFetchMode.fmAll;
+  FConnection.LoginPrompt := False;
+
+
+  FConnection.Params.Clear;
+  FConnection.DriverName := AValue.ToString;
+
   case AValue of
-    TDatabaseTypes.ADS,
     TDatabaseTypes.Firebird,
     TDatabaseTypes.MySQL: raise Exception.Create(TSetup4DDAOSession.GetInstance.SystemMessage.DatabaseNotImplemented);
 
@@ -191,6 +197,34 @@ begin
 
       FConnection.Params.Add(Format('Encrypt=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.EncryptSQLite.ToString]));
       FConnection.Params.Add(Format('Password=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.Password]));
+    end;
+
+    TDatabaseTypes.ADS:
+    begin
+      if TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName.Length > 0 then
+      begin
+        if not (Copy(TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName,
+                 TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName.Length, 1) = '\') then
+          TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName := Format('%s\',
+            [TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName]);
+      end;
+
+      FDriverADS := TFDPhysADSDriverLink.Create(FConnection);
+      FDriverADS.DefaultPath := TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName;
+      FDriverADS.ShowDeleted := False;
+      {$IFDEF WIN32}
+      FDriverADS.VendorLib := Format('%sACE32.DLL', [TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName]);
+      {$ENDIF}
+      {$IFDEF WIN64}
+      FDriverADS.VendorLib := Format('%sACE64.DLL', [TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName]);
+      {$ENDIF}
+
+      FConnection.Params.Add(Format('Database=%s', [TSetup4DDAOSession.GetInstance.ConnectionParam.DatabaseName]));
+      FConnection.Params.Add('Protocol=TCPIP');
+      FConnection.Params.Add('ServerTypes=Local');
+      FConnection.Params.Add('CharacterSet=Ansi');
+      FConnection.Params.Add('TableType=CDX');
+      FConnection.Params.Add('Locking=Compatible');
     end;
   end;
 end;
