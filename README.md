@@ -116,6 +116,94 @@ Initialization
 finalization
   FDAOSetup.ReleaseInstance;
 ```
+##### 🌱 SQLite
+
+* Para estabelecer uma conexão com o banco de dados SQLite, tem que utilizar a classe *Setup4D.DAO.Types*, para configurar o banco de dados adequadamente. Verifique o exemplo abaixo:
+
+```delphi
+uses
+  Setup4D.DAO.Session,
+  Setup4D.DAO.Types;
+
+var
+  FDAOSetup : TSetup4DDAOSession;
+
+implementation
+
+Initialization
+
+  FDAOSetup.ConnectionParam.DatabaseName := <LOCAL_NOME_BANCO_DADOS>;
+  FDAOSetup.ConnectionParam.OpenModeSQLite := <MODO_UTILIZAR>;
+  FDAOSetup.ConnectionParam.LockingMode := <MODO_ABERTURA>;
+  FDAOSetup.ConnectionParam.EncryptSQLite := <MODO_CRIPTOGRARFAR_BANCO_DADO>;
+  FDAOSetup.ConnectionParam.Password := <SENHA_CRIPTOGRAFIA>;
+
+finalization
+  FDAOSetup.ReleaseInstance;
+```
+
+##### 🌱 ADS
+
+* Para estabelecer uma conexão com o banco de dados DBF (através do ADS), tem que configurar a sessão. Verifique o exemplo abaixo:
+
+```delphi
+uses
+  Setup4D.DAO.Session,
+
+var
+  FDAOSetup : TSetup4DDAOSession;
+
+implementation
+
+Initialization
+  FDAOSetup:= TSetup4DDAOSession.GetInstance;
+  FDAOSetup.ConnectionParam.DatabaseName := <LOCAL_BANCO_DADOS>;
+finalization
+  FDAOSetup.ReleaseInstance;
+```
+
+##### 🌱 FIREBIRD
+
+* Para estabelecer uma conexão com o banco de dados DBF (através do ADS), tem que configurar a sessão. Verifique o exemplo abaixo:
+
+```delphi
+uses
+  Setup4D.DAO.Session,
+
+var
+  FDAOSetup : TSetup4DDAOSession;
+
+implementation
+
+Initialization
+  FDAOSetup:= TSetup4DDAOSession.GetInstance;
+  FDAOSetup.ConnectionParam.DatabaseName := <LOCAL_BANCO_DADOS>;
+finalization
+  FDAOSetup.ReleaseInstance;
+```
+##### 🌱 MySQL
+
+* Para estabelecer uma conexão com o banco de dados PostgreSQL, tem que configurar a sessão. Verifique o exemplo abaixo:
+```delphi
+uses
+  Setup4D.DAO.Session;
+
+var
+  FDAOSetup : TSetup4DDAOSession;
+
+implementation
+
+Initialization
+  FDAOSetup:= TSetup4DDAOSession.GetInstance;
+  FDAOSetup.ConnectionParam.Host := <NOME_HOST>;
+  FDAOSetup.ConnectionParam.Port := <PORTA_HOST>;
+  FDAOSetup.ConnectionParam.DatabaseName := <NOME_BANCO_DADOS>;
+  FDAOSetup.ConnectionParam.UserName := <NOME_USUARIO>;
+  FDAOSetup.ConnectionParam.Password := <SENHA_USUARIO>;
+
+finalization
+  FDAOSetup.ReleaseInstance;
+```
 
 #### ⚡️ Classe
 
