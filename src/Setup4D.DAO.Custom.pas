@@ -648,27 +648,27 @@ begin
     FWhere.TryGetValue(LKey, LValueCondition);
     FQuery.SQL.Add(LValueCondition.Operator.ToString);
 
-    LValue := StrToIntDef(LValueCondition.Value, 0);
+    LValue := StrToIntDef(LValueCondition.Value, -2);
 
-    if LValue = 0 then
+    if LValue = -2 then
       FQuery.SQL.Add(' lower(');
 
     FQuery.SQL.Add(LKey);
 
-    if LValue = 0 then
+    if LValue = -2 then
       FQuery.SQL.Add(') ');
 
     FQuery.SQL.Add(LValueCondition.Comparison.ToString);
 
-    if LValue = 0 then
+    if LValue = -2 then
       FQuery.SQL.Add(' lower(');
 
     FQuery.SQL.Add(':' + LKey);
 
-    if LValue = 0 then
+    if LValue = -2 then
       FQuery.SQL.Add(') ');
 
-    if LValue = 0 then
+    if LValue = -2 then
       FQuery.ParamByName(LKey).Value := LValueCondition.Value
     else
       FQuery.ParamByName(LKey).Value := LValue;

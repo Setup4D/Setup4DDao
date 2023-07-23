@@ -45,6 +45,8 @@ begin
       0: LDAO := TSetup4DDAO<TCliente>.New.PGDatabase;
       1: LDAO := TSetup4DDAO<TCliente>.New.SQLiteDatabase;
       2: LDAO := TSetup4DDAO<TCliente>.New.ADSDatabase;
+      3: LDAO := TSetup4DDAO<TCliente>.New.FBDatabase;
+      4: LDAO := TSetup4DDAO<TCliente>.New.MySQLDatabase;
     else
       raise Exception.Create('Banco de dados não especificado...');
     end;
@@ -84,6 +86,8 @@ begin
       0: LDAO := TSetup4DDAO<TClientes>.New.PGDatabase;
       1: LDAO := TSetup4DDAO<TClientes>.New.SQLiteDatabase;
       2: LDAO := TSetup4DDAO<TClientes>.New.ADSDatabase;
+      3: LDAO := TSetup4DDAO<TClientes>.New.FBDatabase;
+      4: LDAO := TSetup4DDAO<TClientes>.New.MySQLDatabase;
     else
       raise Exception.Create('Banco de dados não especificado...');
     end;

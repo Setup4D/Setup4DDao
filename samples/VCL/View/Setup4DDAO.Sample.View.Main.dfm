@@ -2,8 +2,8 @@ object PageMain: TPageMain
   Left = 0
   Top = 0
   Caption = 'Page Main'
-  ClientHeight = 358
-  ClientWidth = 694
+  ClientHeight = 384
+  ClientWidth = 690
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,16 +15,16 @@ object PageMain: TPageMain
   TextHeight = 15
   object PageControl: TPageControl
     Left = 0
-    Top = 0
-    Width = 694
-    Height = 358
-    ActivePage = tsCustom
+    Top = 23
+    Width = 690
+    Height = 361
+    ActivePage = tsRTTi
     Align = alClient
     MultiLine = True
     TabOrder = 0
     TabPosition = tpBottom
-    ExplicitWidth = 690
-    ExplicitHeight = 357
+    ExplicitWidth = 686
+    ExplicitHeight = 360
     object tsRTTi: TTabSheet
       Caption = 'RTTi'
       object lblOperador: TLabel
@@ -325,15 +325,15 @@ object PageMain: TPageMain
         Text = ''
       end
       object pnlBotao: TPanel
-        Left = 366
+        Left = 350
         Top = 302
-        Width = 297
+        Width = 313
         Height = 25
         BevelOuter = bvNone
         TabOrder = 9
         object btOpen: TButton
           Tag = 3
-          Left = 197
+          Left = 213
           Top = 0
           Width = 100
           Height = 25
@@ -344,7 +344,7 @@ object PageMain: TPageMain
         end
         object btExecutar: TButton
           Tag = 3
-          Left = 97
+          Left = 113
           Top = 0
           Width = 100
           Height = 25
@@ -363,5 +363,22 @@ object PageMain: TPageMain
         TabOrder = 10
       end
     end
+  end
+  object cbxBancoDados: TComboBox
+    Left = 0
+    Top = 0
+    Width = 690
+    Height = 23
+    Align = alTop
+    Style = csDropDownList
+    TabOrder = 1
+    OnSelect = cbxBancoDadosSelect
+    Items.Strings = (
+      'Postgree'
+      'SQLite'
+      'ADS'
+      'Firebird'
+      'MySQL')
+    ExplicitTop = -2
   end
 end

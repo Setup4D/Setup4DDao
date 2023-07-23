@@ -192,7 +192,6 @@ type
     {$ENDIF}
     function SQLiteDatabase: ISetup4DDAO<T>;
 
-
    {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Retorna uma nova instância do DAO com uma configuração do
@@ -215,6 +214,52 @@ type
     /// </remarks>
     {$ENDIF}
     function ADSDatabase: ISetup4DDAO<T>;
+
+   {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Retorna uma nova instância do DAO com uma configuração do
+    /// banco de dados FB.
+    /// </summary>
+    /// <returns>
+    /// A instância de ISetup4DDAO<T> com a configuração do
+    /// banco de dados FB.</returns>
+    /// <remarks>
+    /// Este método configura o DAO para usar um banco de dados FB
+    /// para operações de acesso aos dados.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Returns a new instance of the DAO with a FB database configuration.
+    /// </summary>
+    /// <returns>The instance of ISetup4DDAO<T> with the FB database configuration.</returns>
+    /// <remarks>
+    /// This method configures the DAO to use a FB database for data access operations.
+    /// </remarks>
+    {$ENDIF}
+    function FBDatabase: ISetup4DDAO<T>;
+
+   {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Retorna uma nova instância do DAO com uma configuração do
+    /// banco de dados MySQL.
+    /// </summary>
+    /// <returns>
+    /// A instância de ISetup4DDAO<T> com a configuração do
+    /// banco de dados MySQL.</returns>
+    /// <remarks>
+    /// Este método configura o DAO para usar um banco de dados MySQL
+    /// para operações de acesso aos dados.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Returns a new instance of the DAO with a MySQL database configuration.
+    /// </summary>
+    /// <returns>The instance of ISetup4DDAO<T> with the MySQL database configuration.</returns>
+    /// <remarks>
+    /// This method configures the DAO to use a MySQL database for data access operations.
+    /// </remarks>
+    {$ENDIF}
+    function MySQLDatabase: ISetup4DDAO<T>;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -402,6 +447,56 @@ type
     /// <param name="AValue">
     /// O valor a ser comparado.
     /// </param>
+    /// <param name="ASymbol">
+    /// O símbolo de comparação a ser utilizado.
+    /// </param>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> contendo os registros encontrados.
+    /// </returns>
+    /// <remarks>
+    /// Este método permite buscar registros na fonte de dados com base em uma
+    /// chave e valor especificados.
+    /// É possível definir um símbolo de comparação para controlar o tipo
+    /// de comparação a ser realizada.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Finds records in the data source based on the specified key and
+    /// value specified, using an optional comparison symbol.
+    /// </summary>
+    /// <param name="AKey">
+    /// The key to fetch records.
+    /// </param>
+    /// <param name="AValue">
+    /// The value to be compared.
+    /// </param>
+    /// <param name="ASymbol">
+    /// The comparison symbol to be used.
+    /// </param>
+    /// <returns>
+    /// An instance of ISetup4DDAO<T> containing the records found.
+    /// </returns>
+    /// <remarks>
+    /// This method allows to fetch records from the data source based on a specified key and value.
+    /// specified key and value.
+    /// It is possible to define a comparison symbol to control the type /// of comparison to be performed.
+    /// of comparison to be performed.
+    /// </remarks>
+    {$ENDIF}
+    function Find(AKey: string; AValue: string;
+      AComparision: TComparisonOperator): ISetup4DDAO<T>; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Localiza registros na fonte de dados com base na chave e
+    /// valor especificados, utilizando um símbolo de comparação opcional.
+    /// </summary>
+    /// <param name="AKey">
+    /// A chave para buscar registros.
+    /// </param>
+    /// <param name="AValue">
+    /// O valor a ser comparado.
+    /// </param>
     /// <returns>
     /// Uma instância de ISetup4DDAO<T> contendo os registros encontrados.
     /// </returns>
@@ -427,6 +522,43 @@ type
     /// </remarks>
     {$ENDIF}
     function Find(AKey: string; AValue: Variant): ISetup4DDAO<T>; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Localiza registros na fonte de dados com base na chave e
+    /// valor especificados, utilizando um símbolo de comparação opcional.
+    /// </summary>
+    /// <param name="AKey">
+    /// A chave para buscar registros.
+    /// </param>
+    /// <param name="AValue">
+    /// O valor a ser comparado.
+    /// </param>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> contendo os registros encontrados.
+    /// </returns>
+    /// <remarks>
+    /// Este método permite buscar registros na fonte de dados com base em uma
+    /// chave e valor especificados.
+    /// É possível definir um símbolo de comparação para controlar o tipo
+    /// de comparação a ser realizada.
+    /// Por padrão, o símbolo de comparação utilizado é TSymbol.Equal ("="),
+    /// que realiza uma comparação de igualdade.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Finds records in the data source based on the specified key and value, using an optional comparison symbol.
+    /// </summary>
+    /// <param name="AKey">The key to search for records.</param>
+    /// <param name="AValue">The value to compare.</param>
+    /// <returns>An instance of ISetup4DDAO<T> containing the found records.</returns>
+    /// <remarks>
+    /// This method allows you to search for records in the data source based on a specified key and value.
+    /// You can define a comparison symbol to control the type of comparison to be performed.
+    /// By default, the comparison symbol used is TSymbol.Equal, which performs an equality comparison.
+    /// </remarks>
+    {$ENDIF}
+    function Find(AKey: string; AValue: string): ISetup4DDAO<T>; overload;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -1131,7 +1263,10 @@ begin
     FQuery.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
 
   FGenericList.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
-  FreeAndNil(FGeneric);
+
+  if Assigned(FGeneric) then
+    FreeAndNil(FGeneric);
+
   inherited;
 end;
 
@@ -1142,7 +1277,7 @@ begin
   FDAOCustom.Execute;
 end;
 
-function TSetup4DDAO<T>.Find(AKey: String; AValue: Variant;
+function TSetup4DDAO<T>.Find(AKey: String; AValue: string;
   AComparision: TComparisonOperator): ISetup4DDAO<T>;
 var
   LTableName: string;
@@ -1241,6 +1376,109 @@ begin
   Find(AKey, AValue, TComparisonOperator.Equal);
 end;
 
+function TSetup4DDAO<T>.FBDatabase: ISetup4DDAO<T>;
+begin
+  Result := Self;
+  FDataBaseType := TDatabaseTypes.Firebird;
+end;
+
+function TSetup4DDAO<T>.Find(AKey, AValue: string): ISetup4DDAO<T>;
+begin
+  Result:= Self;
+  Find(AKey, AValue, TComparisonOperator.Equal);
+end;
+
+function TSetup4DDAO<T>.Find(AKey: String; AValue: variant;
+  AComparision: TComparisonOperator): ISetup4DDAO<T>;
+var
+  LTableName: string;
+  LFieldNames: TArray<string>;
+  LFieldName: string;
+  LQuery: TFDQuery;
+  LProperty: TRttiProperty;
+  LType: TRttiType;
+  LContext: TRttiContext;
+  LValue: TValue;
+  LGeneric : T;
+begin
+  Result := Self;
+
+  if FDataBaseType = TDatabaseTypes.Null then
+    raise Exception.Create(TSetup4DDAOSession.GetInstance.SystemMessage.DatabaseUndefined);
+
+  LTableName := TSetup4DDAORtti<T>.New.GetTableName;
+  LFieldNames := TSetup4DDAORtti<T>.New.GetFieldNames(TCRUDOperation.Read);
+
+  LQuery := FConnection.SetDataBase(FDataBaseType).GetQuery;
+  try
+    LQuery.SQL.Add('SELECT ');
+    LQuery.SQL.Add(String.Join(', ', LFieldNames));
+    LQuery.SQL.Add(' FROM ');
+    LQuery.SQL.Add(LTableName);
+    LQuery.SQL.Add(' WHERE ');
+    LQuery.SQL.Add(AKey);
+    LQuery.SQL.Add(AComparision.ToString);
+    LQuery.SQL.Add(' :Filter');
+    LQuery.ParamByName('Filter').Value := AValue;
+
+    LQuery.Prepare;
+    LQuery.Open;
+
+    if LQuery.IsEmpty then
+    begin
+      case FValidateWithException of
+        True : raise Exception.Create(TSetup4DDAOSession.GetInstance.SystemMessage.NoRecord);
+        False : Exit;
+      end;
+    end;
+
+    LContext := TRttiContext.Create;
+    LType := LContext.GetType(FGeneric.ClassType);
+
+    LContext := TRttiContext.Create;
+    LType := LContext.GetType(FGeneric.ClassType);
+
+    FGenericList.Clear;
+
+    LQuery.First;
+    while not LQuery.Eof do
+    begin
+      LGeneric := T.Create;
+      for LFieldName in LFieldNames do
+      begin
+        LProperty := LType.GetProperty(LFieldName);
+        if Assigned(LProperty) and LProperty.IsWritable then
+        begin
+          if LQuery.FieldByName(LFieldName).IsNull then
+            LValue := TValue.FromVariant(EmptyStr)
+          else
+            LValue := TValue.FromVariant(LQuery.FieldByName(LFieldName).Value);
+          LProperty.SetValue(TObject(LGeneric), LValue);
+        end;
+      end;
+
+      FGenericList.Add(LGeneric);
+
+      LQuery.Next;
+    end;
+
+    for LFieldName in LFieldNames do
+    begin
+      LProperty := LType.GetProperty(LFieldName);
+      if Assigned(LProperty) and LProperty.IsWritable then
+      begin
+        if LQuery.FieldByName(LFieldName).IsNull then
+          LValue := TValue.FromVariant(EmptyStr)
+        else
+          LValue := TValue.FromVariant(LQuery.FieldByName(LFieldName).Value);
+        LProperty.SetValue(TObject(FGeneric), LValue);
+      end;
+    end;
+  finally
+    LQuery.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
+  end;
+end;
+
 function TSetup4DDAO<T>.FindID(AValue: string): ISetup4DDAO<T>;
 var
   LTableName: string;
@@ -1314,7 +1552,7 @@ end;
 function TSetup4DDAO<T>.FindID(AValue: Integer): ISetup4DDAO<T>;
 begin
   Result := Self;
-  FindID(AValue.ToString);
+  FindID(AValue.ToString.ToInt64);
 end;
 
 function TSetup4DDAO<T>.FindID(AValue: Int64): ISetup4DDAO<T>;
@@ -1570,6 +1808,12 @@ function TSetup4DDAO<T>.Join(Const AValue: String): ISetup4DDAOCustom<T>;
 begin
   Result := Self;
   FDAOCustom.Join(AValue);
+end;
+
+function TSetup4DDAO<T>.MySQLDatabase: ISetup4DDAO<T>;
+begin
+  Result := Self;
+  FDataBaseType := TDatabaseTypes.MySQL;
 end;
 
 class function TSetup4DDAO<T>.New: ISetup4DDAO<T>;

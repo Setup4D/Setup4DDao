@@ -38,7 +38,7 @@ type
   /// an expression to another value or expression.
   /// </summary>
   {$ENDIF}
-  TComparisonOperator = (Null, LessThan, Equal, GreaterThan, Different, DiferentPG, Like, LikePG, LessThanOREqual, GreaterThanOREqual);
+  TComparisonOperator = (Null, LessThan, Equal, GreaterThan, Different, DifferentPG, Like, LikePG, LessThanOREqual, GreaterThanOREqual);
 
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
@@ -84,7 +84,7 @@ type
   /// created, or Read, or Read and write.
   /// </summary>
   {$ENDIF}
-  TOpenMode = (CreateUTF8, CreateUTF16, ReadWrite, ReadOnly);
+  TOpenModeSQLite = (CreateUTF8, CreateUTF16, ReadWrite, ReadOnly);
 
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
@@ -109,6 +109,55 @@ type
   TEncryptSQLite = (No, aes_128, aes_192, aes_256, aes_ctr_128, aes_ctr_256,
                     aes_ecb_128, aes_ecb_192, aes_ecb_256);
 
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Tipo de protocolo utilizados para conectar ao Banco de Dados.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Type of protocol used to connect to the Database.
+  /// </summary>
+  {$ENDIF}
+  TProtocol = (null, Local, TCPIP, NetBEUI, SPX);
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Define o CharSet do banco de dados FB.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Sets the CharSet of the FB database.
+  /// </summary>
+  {$ENDIF}
+  TCharacterSetFB = (null, ISO8859_1, WIN1252);
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Define o colletion para o banco de dados FB, sendo utilizado o junto com
+  /// o Charset ISO8859_1, os colletion PT_BR, ISO8859_1,
+  /// e o WIN1252, os colletion WIN_PTBR, WIN1252
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Defines the colletion for the FB database, being used the together with
+  /// the Charset ISO8859_1, the colletion PT_BR, ISO8859_1,
+  /// and the WIN1252, the colletion WIN_PTBR, WIN1252
+  /// </summary>
+  {$ENDIF}
+  TColleteFB = (null, PT_BR, ISO8859_1, WIN_PTBR, WIN1252);
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Modos de utilização do banco de dados FB que pode ser
+  /// aberto ou criado
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Modes of use of the FB database which can be either
+  /// open or created
+  /// </summary>
+  {$ENDIF}
+  TOpenModeFB = (Open, Create, OpenOrCreate);
 
 {$SCOPEDENUMS OFF}
 

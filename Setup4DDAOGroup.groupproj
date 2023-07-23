@@ -12,6 +12,9 @@
         <Projects Include="samples\FMX\Setup4D_Sample_FMX.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="samples\Test\Setup4D_Sample_Test.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="Setup4D_Sample_FMX:Make">
         <MSBuild Projects="samples\FMX\Setup4D_Sample_FMX.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Setup4D_Sample_Test">
+        <MSBuild Projects="samples\Test\Setup4D_Sample_Test.dproj"/>
+    </Target>
+    <Target Name="Setup4D_Sample_Test:Clean">
+        <MSBuild Projects="samples\Test\Setup4D_Sample_Test.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Setup4D_Sample_Test:Make">
+        <MSBuild Projects="samples\Test\Setup4D_Sample_Test.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Setup4DDAO;Setup4D_Sample_VCL;Setup4D_Sample_FMX"/>
+        <CallTarget Targets="Setup4DDAO;Setup4D_Sample_VCL;Setup4D_Sample_FMX;Setup4D_Sample_Test"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Setup4DDAO:Clean;Setup4D_Sample_VCL:Clean;Setup4D_Sample_FMX:Clean"/>
+        <CallTarget Targets="Setup4DDAO:Clean;Setup4D_Sample_VCL:Clean;Setup4D_Sample_FMX:Clean;Setup4D_Sample_Test:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Setup4DDAO:Make;Setup4D_Sample_VCL:Make;Setup4D_Sample_FMX:Make"/>
+        <CallTarget Targets="Setup4DDAO:Make;Setup4D_Sample_VCL:Make;Setup4D_Sample_FMX:Make;Setup4D_Sample_Test:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

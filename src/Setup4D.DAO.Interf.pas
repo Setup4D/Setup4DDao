@@ -111,6 +111,52 @@ type
     {$ENDIF}
     function ADSDatabase: ISetup4DDAO<T>;
 
+   {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Retorna uma nova instância do DAO com uma configuração do
+    /// banco de dados FB.
+    /// </summary>
+    /// <returns>
+    /// A instância de ISetup4DDAO<T> com a configuração do
+    /// banco de dados FB.</returns>
+    /// <remarks>
+    /// Este método configura o DAO para usar um banco de dados FB
+    /// para operações de acesso aos dados.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Returns a new instance of the DAO with a FB database configuration.
+    /// </summary>
+    /// <returns>The instance of ISetup4DDAO<T> with the FB database configuration.</returns>
+    /// <remarks>
+    /// This method configures the DAO to use a FB database for data access operations.
+    /// </remarks>
+    {$ENDIF}
+    function FBDatabase: ISetup4DDAO<T>;
+
+   {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Retorna uma nova instância do DAO com uma configuração do
+    /// banco de dados MySQL.
+    /// </summary>
+    /// <returns>
+    /// A instância de ISetup4DDAO<T> com a configuração do
+    /// banco de dados MySQL.</returns>
+    /// <remarks>
+    /// Este método configura o DAO para usar um banco de dados MySQL
+    /// para operações de acesso aos dados.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Returns a new instance of the DAO with a MySQL database configuration.
+    /// </summary>
+    /// <returns>The instance of ISetup4DDAO<T> with the MySQL database configuration.</returns>
+    /// <remarks>
+    /// This method configures the DAO to use a MySQL database for data access operations.
+    /// </remarks>
+    {$ENDIF}
+    function MySQLDatabase: ISetup4DDAO<T>;
+
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Configura o DAO para realizar validação com exceções.
@@ -323,6 +369,42 @@ type
     {$ENDIF}
     function Find(AKey: string; AValue: Variant): ISetup4DDAO<T>; overload;
 
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Localiza registros na fonte de dados com base na chave e
+    /// valor especificados, utilizando um símbolo de comparação opcional.
+    /// </summary>
+    /// <param name="AKey">
+    /// A chave para buscar registros.
+    /// </param>
+    /// <param name="AValue">
+    /// O valor a ser comparado.
+    /// </param>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> contendo os registros encontrados.
+    /// </returns>
+    /// <remarks>
+    /// Este método permite buscar registros na fonte de dados com base em uma
+    /// chave e valor especificados.
+    /// É possível definir um símbolo de comparação para controlar o tipo
+    /// de comparação a ser realizada.
+    /// Por padrão, o símbolo de comparação utilizado é TSymbol.Equal ("="),
+    /// que realiza uma comparação de igualdade.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Finds records in the data source based on the specified key and value, using an optional comparison symbol.
+    /// </summary>
+    /// <param name="AKey">The key to search for records.</param>
+    /// <param name="AValue">The value to compare.</param>
+    /// <returns>An instance of ISetup4DDAO<T> containing the found records.</returns>
+    /// <remarks>
+    /// This method allows you to search for records in the data source based on a specified key and value.
+    /// You can define a comparison symbol to control the type of comparison to be performed.
+    /// By default, the comparison symbol used is TSymbol.Equal, which performs an equality comparison.
+    /// </remarks>
+    {$ENDIF}
+    function Find(AKey: string; AValue: string): ISetup4DDAO<T>; overload;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>

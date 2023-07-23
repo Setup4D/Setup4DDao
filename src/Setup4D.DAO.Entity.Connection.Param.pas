@@ -40,9 +40,12 @@ type
     FDatabaseName: string;
     FUserName: string;
     FPassword: string;
-    FOpenMode: TOpenMode;
+    FOpenModeSQLite: TOpenModeSQLite;
     FLockingMode: TLokingMode;
     FEncryptSQLite: TEncryptSQLite;
+    FProtocol: TProtocol;
+    FCharacterSetFB: TCharacterSetFB;
+    FOpenModeFB: TOpenModeFB;
   public
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -118,7 +121,7 @@ type
     /// SQLite file open mode.
     /// </summary>
     {$ENDIF}
-    property OpenMode: TOpenMode read FOpenMode write FOpenMode;
+    property OpenModeSQLite: TOpenModeSQLite read FOpenModeSQLite write FOpenModeSQLite;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -141,6 +144,40 @@ type
     /// </summary>
     {$ENDIF}
     property EncryptSQLite: TEncryptSQLite read FEncryptSQLite write FEncryptSQLite;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Tipo de Protlocolo.
+    /// </summary>
+    {$ELSE}
+    /// <summary>
+    /// Protocol type.
+    /// </summary>
+    {$ENDIF}
+    property Protocol: TProtocol read FProtocol write FProtocol;
+
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Tipo de Protlocolo.
+    /// </summary>
+    {$ELSE}
+    /// <summary>
+    /// Protocol type.
+    /// </summary>
+    {$ENDIF}
+    property CharacterSetFB: TCharacterSetFB read FCharacterSetFB write FCharacterSetFB;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Modo de abertura do arquivo SQLite.
+    /// </summary>
+    {$ELSE}
+    /// <summary>
+    /// SQLite file open mode.
+    /// </summary>
+    {$ENDIF}
+    property OpenModeFB: TOpenModeFB read FOpenModeFB write FOpenModeFB;
   end;
 implementation
 

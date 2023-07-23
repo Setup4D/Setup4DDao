@@ -33,7 +33,11 @@ requires
   FireDAC,
   FireDACCommonDriver,
   FireDACCommon,
-  FireDACPgDriver;
+  FireDACPgDriver,
+  FireDACIBDriver,
+  FireDACMySQLDriver,
+  FireDACSqliteDriver,
+  FireDACADSDriver;
 
 contains
   Setup4D.DAO.Types in 'src\Setup4D.DAO.Types.pas',

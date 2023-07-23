@@ -121,6 +121,7 @@ type
   /// The enumerated type.
   /// </typeparam>
   {$ENDIF}
+
   TSetup4DDAOEnumeratedTypes<T> = class
   public
     {$IFDEF HAS_PORTUGUES}
@@ -145,6 +146,7 @@ type
     /// </returns>
     {$ENDIF}
     class function EnumToString(AValue: T): string;
+
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Preenche uma lista de strings com os valores do tipo enumerado.

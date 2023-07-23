@@ -2,7 +2,7 @@ object PageMain: TPageMain
   Left = 0
   Top = 0
   Caption = 'Page Main'
-  ClientHeight = 371
+  ClientHeight = 393
   ClientWidth = 640
   Fill.Color = claBlack
   Fill.Kind = Solid
@@ -14,13 +14,13 @@ object PageMain: TPageMain
   OnCreate = FormCreate
   DesignerMasterStyle = 0
   object TabControl: TTabControl
-    Align = Contents
+    Align = Client
     Size.Width = 640.000000000000000000
     Size.Height = 371.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'TabControlCustom'
     TabIndex = 1
-    TabOrder = 0
+    TabOrder = 1
     TabPosition = Bottom
     Sizes = (
       640s
@@ -1056,5 +1056,20 @@ object PageMain: TPageMain
           436F6C6F72070978374632413936464600000B54466F6E744F626A6563740009
           5374796C654E616D650604666F6E74000000}
       end>
+  end
+  object cbxBancoDados: TComboBox
+    Align = Top
+    Hint = 'Selecionar o tipo de filtro'
+    Items.Strings = (
+      'Postgree'
+      'SQLite'
+      'ADS'
+      'Firebird'
+      'MySQL')
+    Size.Width = 640.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    OnChange = cbxBancoDadosChange
   end
 end

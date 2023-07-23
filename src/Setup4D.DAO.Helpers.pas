@@ -167,7 +167,7 @@ type
   /// Helper record for the TOpenMode enumeration.
   /// </summary>
   {$ENDIF}
-  TSetup4DDAOOpenModeHelper = record helper for TOpenMode
+  TSetup4DDAOOpenModeSQLiteHelper = record helper for TOpenModeSQLite
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Converte o valor da enumeração em uma string.
@@ -213,6 +213,119 @@ type
     {$ENDIF}
     function ToString: string;
   end;
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Helper record para a enumeração TProtocol.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Helper record for the TProtocol enumeration.
+  /// </summary>
+  {$ENDIF}
+  TSetup4DDAOProtocolHelper = record helper for TProtocol
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte o valor da enumeração em uma string.
+    /// </summary>
+    /// <returns>
+    /// A string correspondente ao valor da enumeração.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts the enumeration value to a string.
+    /// </summary>
+    /// <returns>
+    /// The string corresponding to the enumeration value.
+    /// </returns>
+    {$ENDIF}
+    function ToString: string;
+  end;
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Helper record para a enumeração TCharacterSetFB.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Helper record for the TCharacterSetFB enumeration.
+  /// </summary>
+  {$ENDIF}
+  TSetup4DDAOCharacterSetFBHelper = record helper for TCharacterSetFB
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte o valor da enumeração em uma string.
+    /// </summary>
+    /// <returns>
+    /// A string correspondente ao valor da enumeração.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts the enumeration value to a string.
+    /// </summary>
+    /// <returns>
+    /// The string corresponding to the enumeration value.
+    /// </returns>
+    {$ENDIF}
+    function ToString: string;
+  end;
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Helper record para a enumeração TColleteFB.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Helper record for the TColleteFB enumeration.
+  /// </summary>
+  {$ENDIF}
+  TSetup4DDAOColleteFBHelper = record helper for TColleteFB
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte o valor da enumeração em uma string.
+    /// </summary>
+    /// <returns>
+    /// A string correspondente ao valor da enumeração.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts the enumeration value to a string.
+    /// </summary>
+    /// <returns>
+    /// The string corresponding to the enumeration value.
+    /// </returns>
+    {$ENDIF}
+    function ToString: string;
+  end;
+
+  {$IFDEF HAS_PORTUGUES}
+  /// <summary>
+  /// Helper record para a enumeração TOpenModeFB.
+  /// </summary>
+  {$ELSE}
+  /// <summary>
+  /// Helper record for the TOpenModeFB enumeration.
+  /// </summary>
+  {$ENDIF}
+  TSetup4DDAOOpenModeFBHelper = record helper for TOpenModeFB
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte o valor da enumeração em uma string.
+    /// </summary>
+    /// <returns>
+    /// A string correspondente ao valor da enumeração.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts the enumeration value to a string.
+    /// </summary>
+    /// <returns>
+    /// The string corresponding to the enumeration value.
+    /// </returns>
+    {$ENDIF}
+    function ToString: string;
+  end;
+
 implementation
 
 uses
@@ -230,7 +343,7 @@ begin
       Result := '=';
     TComparisonOperator.GreaterThan:
       Result := '>';
-    TComparisonOperator.DiferentPG:
+    TComparisonOperator.DifferentPG:
       Result := '!=';
     TComparisonOperator.Different:
       Result := '<>';
@@ -310,13 +423,13 @@ end;
 
 { TSetup4DDAOOpenModeHelper }
 
-function TSetup4DDAOOpenModeHelper.ToString: string;
+function TSetup4DDAOOpenModeSQLiteHelper.ToString: string;
 begin
   case self of
-    TOpenMode.CreateUTF8: Result := 'CreateUTF8';
-    TOpenMode.CreateUTF16: Result := 'CreateUTF16';
-    TOpenMode.ReadWrite: Result := 'ReadWrite';
-    TOpenMode.ReadOnly: Result := 'ReadOnly';
+    TOpenModeSQLite.CreateUTF8: Result := 'CreateUTF8';
+    TOpenModeSQLite.CreateUTF16: Result := 'CreateUTF16';
+    TOpenModeSQLite.ReadWrite: Result := 'ReadWrite';
+    TOpenModeSQLite.ReadOnly: Result := 'ReadOnly';
   end;
 end;
 
@@ -327,6 +440,54 @@ begin
   case self of
     TLokingMode.Exclusive: Result := 'Exclusive';
     TLokingMode.Normal: Result := 'Normal';
+  end;
+end;
+
+{ TSetup4DDAOProtocolHelper }
+
+function TSetup4DDAOProtocolHelper.ToString: string;
+begin
+  case Self of
+    TProtocol.null: Result:= EmptyStr;
+    TProtocol.Local: Result:= 'Local';
+    TProtocol.TCPIP: Result:= 'TCPIP';
+    TProtocol.NetBEUI: Result:= 'NetBEUI';
+    TProtocol.SPX: Result:= 'SPX';
+  end;
+end;
+
+{ TSetup4DDAOCharacterSetFBHelper }
+
+function TSetup4DDAOCharacterSetFBHelper.ToString: string;
+begin
+  case Self of
+    TCharacterSetFB.null: Result := EmptyStr;
+    TCharacterSetFB.ISO8859_1: Result := 'ISO8859_1';
+    TCharacterSetFB.WIN1252: Result := 'WIN1252';
+  end;
+end;
+
+{ TSetup4DDAOColleteFBHelper }
+
+function TSetup4DDAOColleteFBHelper.ToString: string;
+begin
+  case Self of
+    TColleteFB.null: Result := EmptyStr;
+    TColleteFB.PT_BR: Result := 'PT_BR';
+    TColleteFB.ISO8859_1: Result := 'ISO8859_1';
+    TColleteFB.WIN_PTBR: Result := 'WIN_PTBR';
+    TColleteFB.WIN1252: Result := 'WIN1252';
+  end;
+end;
+
+{ TSetup4DDAOOpenModeFBHelper }
+
+function TSetup4DDAOOpenModeFBHelper.ToString: string;
+begin
+  case self of
+    TOpenModeFB.Open: Result := 'Open';
+    TOpenModeFB.Create: Result := 'Create';
+    TOpenModeFB.OpenOrCreate: Result := 'OpenOrCreate';
   end;
 end;
 
