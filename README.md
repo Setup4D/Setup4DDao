@@ -345,6 +345,8 @@ end;
 - **TSetup4DDAO&lt;CLASSE_BANCO_DADO&gt;.New.GetClassList**, é invocado para obter uma lista de objetos genéricos associados ao DAO. Em seguida, a lista retornada é atribuída ao parâmetro *Generics* do *TSetup4DDAO&lt;T&gt;*. 
 - **TSetup4DDAO&lt;CLASSE_BANCO_DADO&gt;.New.NoSelect**, é invocado quando o comando na exceção não é um SELECT;
 - **TSetup4DDAO&lt;CLASSE_BANCO_DADO&gt;.New.OnlySelect**, é invocado quando o comando na exceção é um SELECT;
+- **TSetup4DDAO&lt;CLASSE_BANCO_DADO&gt;.New.DatabaseTransactionEnabled**, permite habilitar transações no banco de dados;
+- **TSetup4DDAO&lt;CLASSE_BANCO_DADO&gt;.New.DatabaseTransactionDisabled**, permite desabilitar transações no banco de dados;
 
 ### ⚙️ DAO personalizado
 
