@@ -99,6 +99,9 @@ type
 
     [Test]
     procedure Vacuum;
+
+    [Test]
+    procedure DisabledTransection;
   end;
 
 implementation
@@ -327,6 +330,17 @@ begin
                       end,
                       nil,
                       'Registro localizado');
+end;
+
+procedure TTestSQLite.DisabledTransection;
+begin
+  FDAO.DatabaseTransactionDisabled;
+  InsertRegisterRTTi;
+  EditRegisterRTTi;
+  DeleteRegisterRTTi;
+  InsertRegister;
+  EditRegister;
+  DeleteRegister;
 end;
 
 procedure TTestSQLite.EditRegister;

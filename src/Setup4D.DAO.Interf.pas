@@ -44,6 +44,40 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
+    /// Habilita a transação do banco de dados
+    /// </summary>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> representando o objeto atual.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Enable database transaction
+    /// </summary>
+    /// <returns>
+    /// An instance of ISetup4DDAO<T> representing the current object.
+    /// </returns>
+    {$ENDIF}
+    function DatabaseTransactionEnabled: ISetup4DDAO<T>;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Desabilita a transação do banco de dados
+    /// </summary>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> representando o objeto atual.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Disabled database transaction
+    /// </summary>
+    /// <returns>
+    /// An instance of ISetup4DDAO<T> representing the current object.
+    /// </returns>
+    {$ENDIF}
+    function DatabaseTransactionDisabled : ISetup4DDAO<T>;
+
+     {$IFDEF HAS_PORTUGUES}
+    /// <summary>
     /// Retorna uma nova instância do DAO com uma configuração do
     /// banco de dados PostgreSQL.
     /// </summary>

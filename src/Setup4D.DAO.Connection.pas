@@ -66,7 +66,7 @@ type
 
     FCursor: TFDGUIxWaitCursor;
 
-    {$IFDEF HAS_PORTUGUES}
+   {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Inicia a configuração do banco de dados com o tipo especificado.
     /// </summary>
@@ -137,7 +137,6 @@ type
     /// </summary>
     {$ENDIF}
     procedure MySQLConfiguration;
-
   protected
 
     {$IFDEF HAS_PORTUGUES}

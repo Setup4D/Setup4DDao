@@ -96,6 +96,9 @@ type
 
     [Test]
     procedure DeleteRegister;
+
+    [Test]
+    procedure DisabledTransection;
   end;
 
 implementation
@@ -327,6 +330,18 @@ begin
                       end,
                       nil,
                       'Registro localizado');
+end;
+
+procedure TTestFB.DisabledTransection;
+begin
+  FDAO.DatabaseTransactionDisabled;
+  InsertRegisterRTTi;
+  EditRegisterRTTi;
+  DeleteRegisterRTTi;
+  InsertRegister;
+  EditRegister;
+  DeleteRegister;
+
 end;
 
 procedure TTestFB.EditRegister;

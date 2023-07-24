@@ -64,6 +64,7 @@ type
     FDataBaseType : TDatabaseTypes;
     FConnection: ISetup4DDAOConnection<T>;
     FValidateWithException : Boolean;
+    FDatabaseTransaction: Boolean;
 
   {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -146,6 +147,40 @@ type
   {$ENDIF}
     constructor Create;
   protected
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Habilita a transação do banco de dados
+    /// </summary>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> representando o objeto atual.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Enable database transaction
+    /// </summary>
+    /// <returns>
+    /// An instance of ISetup4DDAO<T> representing the current object.
+    /// </returns>
+    {$ENDIF}
+    function DatabaseTransactionEnabled: ISetup4DDAO<T>;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Desabilita a transação do banco de dados
+    /// </summary>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> representando o objeto atual.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Disabled database transaction
+    /// </summary>
+    /// <returns>
+    /// An instance of ISetup4DDAO<T> representing the current object.
+    /// </returns>
+    {$ENDIF}
+    function DatabaseTransactionDisabled : ISetup4DDAO<T>;
+
    {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Retorna uma nova instância do DAO com uma configuração do
@@ -1200,6 +1235,7 @@ end;
 
 constructor TSetup4DDAO<T>.Create;
 begin
+  FDatabaseTransaction := True;
   FGeneric := T.Create;
   FGenericList := TObjectList<T>.Create;
   FDaoCustom := TSetup4DDAOCustom.New;
@@ -1219,6 +1255,18 @@ begin
   FQuery := FConnection.SetDataBase(FDataBaseType).GetQuery;
 
   FDAOCustom.Query(FQuery);
+end;
+
+function TSetup4DDAO<T>.DatabaseTransactionDisabled: ISetup4DDAO<T>;
+begin
+  Result := Self;
+  FDatabaseTransaction := False;
+end;
+
+function TSetup4DDAO<T>.DatabaseTransactionEnabled: ISetup4DDAO<T>;
+begin
+  Result := Self;
+  FDatabaseTransaction := True;
 end;
 
 function TSetup4DDAO<T>.DataSet: TDataSet;
@@ -1251,7 +1299,26 @@ begin
     LQuery.ParamByName(LPrimaryKeyName).Value := IsPrimaryKey;
 
     LQuery.Prepare;
-    LQuery.ExecSQL;
+
+    if FDatabaseTransaction then
+      if not FConnection.GetConnection.InTransaction then
+        FConnection.GetConnection.StartTransaction;
+
+    try
+      LQuery.ExecSQL;
+
+      if FDatabaseTransaction then
+        if FConnection.GetConnection.InTransaction then
+          FConnection.GetConnection.Commit;
+
+    except on E: Exception do
+      begin
+        if FDatabaseTransaction then
+          if FConnection.GetConnection.InTransaction then
+            FConnection.GetConnection.Rollback;
+        raise Exception.Create(E.Message);
+      end;
+    end;
   finally
     LQuery.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
   end;
@@ -1685,7 +1752,26 @@ begin
     end;
 
     LQuery.Prepare;
-    LQuery.ExecSQL;
+
+    if FDatabaseTransaction then
+      if not FConnection.GetConnection.InTransaction then
+        FConnection.GetConnection.StartTransaction;
+
+    try
+      LQuery.ExecSQL;
+
+      if FDatabaseTransaction then
+        if FConnection.GetConnection.InTransaction then
+          FConnection.GetConnection.Commit;
+
+    except on E: Exception do
+      begin
+        if FDatabaseTransaction then
+          if FConnection.GetConnection.InTransaction then
+            FConnection.GetConnection.Rollback;
+        raise Exception.Create(E.Message);
+      end;
+    end;
   finally
     LQuery.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
   end;
@@ -1924,7 +2010,27 @@ begin
     LQuery.ParamByName(LPrimaryKeyName).Value := IsPrimaryKey;
 
     LQuery.Prepare;
-    LQuery.ExecSQL;
+
+    if FDatabaseTransaction then
+      if not FConnection.GetConnection.InTransaction then
+        FConnection.GetConnection.StartTransaction;
+
+    try
+      LQuery.ExecSQL;
+
+      if FDatabaseTransaction then
+        if FConnection.GetConnection.InTransaction then
+          FConnection.GetConnection.Commit;
+
+    except on E: Exception do
+      begin
+        if FDatabaseTransaction then
+          if FConnection.GetConnection.InTransaction then
+            FConnection.GetConnection.Rollback;
+        raise Exception.Create(E.Message);
+      end;
+    end;
+
   finally
     LUpdateFields.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
     LQuery.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
