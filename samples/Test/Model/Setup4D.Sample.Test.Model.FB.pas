@@ -477,11 +477,10 @@ procedure TTestFB.FindLike;
 begin
   Assert.WillNotRaise(procedure
                       begin
-                        FDAO.Find('nome', '%Teste%', TComparisonOperator.Like);
+                        FDAO.Find('nome', '%teStE%', TComparisonOperator.Like);
                       end,
                       nil,
                       'Nenhum registro que contenha dados foi localizado');
-
 end;
 
 procedure TTestFB.FindLikePG;

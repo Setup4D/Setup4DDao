@@ -343,6 +343,56 @@ type
     /// <param name="AValue">
     /// O valor a ser comparado.
     /// </param>
+    /// <param name="ASymbol">
+    /// O símbolo de comparação a ser utilizado.
+    /// </param>
+    /// <returns>
+    /// Uma instância de ISetup4DDAO<T> contendo os registros encontrados.
+    /// </returns>
+    /// <remarks>
+    /// Este método permite buscar registros na fonte de dados com base em uma
+    /// chave e valor especificados.
+    /// É possível definir um símbolo de comparação para controlar o tipo
+    /// de comparação a ser realizada.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Finds records in the data source based on the specified key and
+    /// value specified, using an optional comparison symbol.
+    /// </summary>
+    /// <param name="AKey">
+    /// The key to fetch records.
+    /// </param>
+    /// <param name="AValue">
+    /// The value to be compared.
+    /// </param>
+    /// <param name="ASymbol">
+    /// The comparison symbol to be used.
+    /// </param>
+    /// <returns>
+    /// An instance of ISetup4DDAO<T> containing the records found.
+    /// </returns>
+    /// <remarks>
+    /// This method allows to fetch records from the data source based on a specified key and value.
+    /// specified key and value.
+    /// It is possible to define a comparison symbol to control the type /// of comparison to be performed.
+    /// of comparison to be performed.
+    /// </remarks>
+    {$ENDIF}
+    function Find(AKey: string; AValue: string;
+      AComparision: TComparisonOperator): ISetup4DDAO<T>; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Localiza registros na fonte de dados com base na chave e
+    /// valor especificados, utilizando um símbolo de comparação opcional.
+    /// </summary>
+    /// <param name="AKey">
+    /// A chave para buscar registros.
+    /// </param>
+    /// <param name="AValue">
+    /// O valor a ser comparado.
+    /// </param>
     /// <returns>
     /// Uma instância de ISetup4DDAO<T> contendo os registros encontrados.
     /// </returns>
