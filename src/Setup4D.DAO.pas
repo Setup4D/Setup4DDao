@@ -136,6 +136,34 @@ type
   {$ENDIF}
     function IsPrimaryKeyName: string;
 
+
+  {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Define o valor da chave primária para o campo atual.
+    /// </summary>
+    /// <param name="AValue">
+    /// O valor a ser atribuído à chave primária.
+    /// </param>
+    /// <remarks>
+    /// Este método define o valor da chave primária para o campo atual utilizando RTTI.
+    /// O valor deve ser do tipo apropriado para o campo de chave primária, e o método assume
+    /// que a propriedade correspondente está disponível e é gravável.
+    /// </remarks>
+  {$ELSE}
+    /// <summary>
+    /// Sets the primary key value for the current field.
+    /// </summary>
+    /// <param name="AValue">
+    /// The value to be assigned to the primary key.
+    /// </param>
+    /// <remarks>
+    /// This method sets the primary key value for the current field using RTTI.
+    /// The value should be of the appropriate type for the primary key field, and the method assumes
+    /// that the corresponding property is available and writable.
+    /// </remarks>
+  {$ENDIF}
+  procedure SetPrimaryKeyValue(const AValue: Variant);
+
   {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Construtor da classe TSetup4DDAO.
@@ -1730,6 +1758,8 @@ begin
     LQuery.SQL.Add( ':' + String.Join(', :', LFieldNames));
     LQuery.SQL.Add(')');
 
+    LQuery.SQL.Add('RETURNING '+ IsPrimaryKeyName + ';');
+
     if not IsFieldValid then
       Exit;
 
@@ -1758,7 +1788,9 @@ begin
         FConnection.GetConnection.StartTransaction;
 
     try
-      LQuery.ExecSQL;
+      LQuery.Open;
+
+      SetPrimaryKeyValue(LQuery.FieldByName(IsPrimaryKeyName).AsVariant);
 
       if FDatabaseTransaction then
         if FConnection.GetConnection.InTransaction then
@@ -1929,6 +1961,21 @@ function TSetup4DDAO<T>.PGDatabase: ISetup4DDAO<T>;
 begin
   Result := Self;
   FDataBaseType := TDatabaseTypes.PG;
+end;
+
+procedure TSetup4DDAO<T>.SetPrimaryKeyValue(const AValue: Variant);
+begin
+  var LRttiContext := TRttiContext.Create;
+  try
+    var LRttiType := LRttiContext.GetType(FGeneric.ClassType);
+    var LRttiProperty := LRttiType.GetProperty(IsPrimaryKeyName);
+
+    if Assigned(LRttiProperty) and LRttiProperty.IsWritable then
+      LRttiProperty.SetValue(TObject(FGeneric), TValue.From(AValue));
+  finally
+    LRttiContext.{$IFDEF MSWINDOWS}Free{$ELSE}DisposeOf{$ENDIF};
+  end;
+
 end;
 
 function TSetup4DDAO<T>.SQL(Const AValue: string): ISetup4DDAOCustom<T>;
